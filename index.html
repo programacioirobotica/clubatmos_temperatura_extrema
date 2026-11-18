@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#15121f" />
+    <meta name="description" content="El Club ATMOS investiga l'augment de temperatura al planeta: simulacions, mesures de temperatura, energies netes i reptes interactius de Robots en Acció!" />
+    <meta property="og:title" content="Club ATMOS · Laboratori de la temperatura" />
+    <meta property="og:description" content="Investiga com puja la temperatura del planeta amb simulacions i reptes interactius de Robots en Acció!" />
+    <meta property="og:image" content="%BASE_URL%assets/atmos-01.webp" />
+    <link rel="icon" href="%BASE_URL%assets/rea-logo.webp" type="image/webp" />
+    <title>Club ATMOS · Laboratori de la temperatura · Robots en Acció</title>
+  </head>
+  <body>
+    <svg class="icon-sprite" aria-hidden="true">
+      <symbol id="icon-center" viewBox="0 0 64 64"><path d="M8 30h48M14 30v24M50 30v24M22 30V16h20v14"/><path d="M28 22h8"/></symbol>
+      <symbol id="icon-window" viewBox="0 0 64 64"><path d="M12 8h40v48H12zM32 8v48M12 32h40"/><circle cx="46" cy="18" r="0.5"/></symbol>
+      <symbol id="icon-radiator" viewBox="0 0 64 64"><path d="M10 24h44v28H10zM19 24v28M28 24v28M37 24v28M46 24v28"/><path d="M20 16c-3-3 3-5 0-9M32 16c-3-3 3-5 0-9M44 16c-3-3 3-5 0-9"/></symbol>
+      <symbol id="icon-door" viewBox="0 0 64 64"><path d="M16 6h32v52H16z"/><path d="M24 14h16v16H24zM24 36h16v16H24z"/><circle cx="43" cy="33" r="1.8"/></symbol>
+      <symbol id="icon-thermo" viewBox="0 0 64 64"><path d="M26 8a6 6 0 0 1 12 0v28a12 12 0 1 1-12 0z"/><path d="M32 22v26"/><circle cx="32" cy="48" r="4"/></symbol>
+    </svg>
+    <a class="skip-link" href="#main">Salta al contingut</a>
+    <header class="site-header">
+      <a class="brand" href="#inici" aria-label="Robots en Acció, Club ATMOS, inici">
+        <img class="brand-logo" src="/assets/rea-logo.webp" alt="" width="52" height="52" />
+        <span>ROBOTS EN ACCIÓ! <b>· CLUB ATMOS</b></span>
+      </a>
+      <nav aria-label="Navegació principal">
+        <a href="#explora">Aprèn</a>
+        <a href="#experimenta">Experimenta</a>
+        <a href="#energia">Energia</a>
+        <a href="#consequencies">Efectes</a>
+        <a href="#missio">Missió</a>
+        <span class="progress-pill" aria-live="polite"><span id="progressValue">0</span>% completat</span>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- ============================ HERO ============================ -->
+      <section class="hero" id="inici">
+        <div class="hero-copy">
+          <div class="initiative-lockup" aria-label="Robots en Acció i El Club ATMOS">
+            <img class="rea-title" src="/assets/robots-en-accio.webp" alt="Robots en Acció!" width="1100" height="366" />
+            <span class="brand-divider" aria-hidden="true"></span>
+            <img class="atmos-title" src="/assets/club-atmos.webp" alt="El Club ATMOS" width="1200" height="400" />
+          </div>
+          <p class="eyebrow"><span></span> Investigació 02 · Augment de temperatura al planeta</p>
+          <h1>Investiguem<br><em>la temperatura.</em></h1>
+          <p class="hero-lead">Som a l’any 2070. L’Ombra, una immensa taca fosca, s’estén per l’atmosfera i el planeta s’escalfa cada vegada més. El Club ATMOS necessita entendre com canvia la temperatura, per què puja i què podem fer per frenar-ho.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#explora">Comença la investigació <span aria-hidden="true">↓</span></a>
+            <button class="ghost-button" id="openPrimer" type="button">Quina és la missió?</button>
+          </div>
+          <dl class="hero-facts" aria-label="Idees clau">
+            <div><dt>01</dt><dd><b>La temperatura canvia</b><span>Mesurarem com varia al llarg del dia i dels anys.</span></dd></div>
+            <div><dt>02</dt><dd><b>El planeta s’escalfa</b><span>Descobrirem per què el CO₂ atrapa la calor del Sol.</span></dd></div>
+            <div><dt>03</dt><dd><b>Mesurem i actuem</b><span>Farem hipòtesis, recollirem dades i buscarem solucions.</span></dd></div>
+          </dl>
+        </div>
+
+        <div class="hero-visual" aria-label="El Club ATMOS investiga la temperatura del planeta al seu laboratori">
+          <img class="hero-art" src="/assets/atmos-01.webp" alt="Els quatre membres del Club ATMOS investiguen una projecció hologràfica de la Terra al laboratori" width="1280" height="720" />
+          <div class="scope-grid" aria-hidden="true"></div>
+          <canvas id="heroScope" width="700" height="520" aria-hidden="true"></canvas>
+          <div class="live-meter">
+            <span>TEMPERATURA SIMULADA</span>
+            <strong><span id="heroTemp">21</span> <small>°C</small></strong>
+            <div class="meter-track"><i id="heroMeterFill"></i></div>
+            <p id="heroStatus"><span></span> Zona de confort</p>
+          </div>
+          <p class="scope-caption">TEMPERATURA / TEMPS</p>
+        </div>
+      </section>
+
+      <!-- ============================ EL CLUB ============================ -->
+      <section class="team-section" id="club">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span></span> L’equip d’investigadors</p><h2>Coneix el Club ATMOS</h2></div>
+          <p>Cadascun té una habilitat especial que serà imprescindible per superar la missió. Ara és el vostre torn de posar-les en pràctica!</p>
+        </div>
+        <div class="team-grid">
+          <article class="team-card" style="--member:#a96cf0"><img src="/assets/atmos-nitro.webp" alt="Nitro, l’enginyera del Club ATMOS" loading="lazy" width="512" height="512" /><div><span>ENGINYERIA</span><h3>Nitro</h3><p>Construeix, munta i millora els dispositius que permeten obtenir dades del medi.</p></div></article>
+          <article class="team-card" style="--member:#3d7bff"><img src="/assets/atmos-link.webp" alt="Link, l’especialista en programació del Club ATMOS" loading="lazy" width="512" height="512" /><div><span>PROGRAMACIÓ</span><h3>Link</h3><p>Dona vida a la tecnologia programant sensors i sistemes intel·ligents.</p></div></article>
+          <article class="team-card" style="--member:#ff8a3d"><img src="/assets/atmos-eko.webp" alt="Eko, l’especialista en comunicació científica del Club ATMOS" loading="lazy" width="512" height="512" /><div><span>COMUNICACIÓ CIENTÍFICA</span><h3>Eko</h3><p>Recull evidències, documenta les investigacions i transforma les dades en informació útil.</p></div></article>
+          <article class="team-card" style="--member:#3fae6a"><img src="/assets/atmos-bio.webp" alt="Bio, l’expert en medi ambient del Club ATMOS" loading="lazy" width="512" height="512" /><div><span>MEDI AMBIENT</span><h3>Bio</h3><p>Analitza els resultats i estudia com afecten els diferents fenòmens al nostre entorn.</p></div></article>
+        </div>
+        <ol class="method-strip" aria-label="Com treballem">
+          <li><b>1</b><span>Observem</span><small>Detectem un problema</small></li>
+          <li><b>2</b><span>Formulem una hipòtesi</span><small>Ens preguntem i delimitem el problema</small></li>
+          <li><b>3</b><span>Dissenyem l’experiment</span><small>Definim els passos a seguir</small></li>
+          <li><b>4</b><span>Experimentem</span><small>Programem i recollim mesures</small></li>
+          <li><b>5</b><span>Analitzem i concloem</span><small>Representem gràfics i interpretem</small></li>
+        </ol>
+      </section>
+
+      <!-- ============================ APRÈN ============================ -->
+      <section class="foundations-section" id="explora">
+        <div class="section-heading foundations-heading">
+          <div><p class="eyebrow"><span></span> Abans de mesurar</p><h2>Què li passa a la temperatura?</h2></div>
+          <p>Farem tres petites investigacions. Primer pensa què passarà. Després prova-ho i compara la teva idea amb el resultat.</p>
+        </div>
+
+        <article class="foundation-lab" id="greenhouseLab">
+          <div class="lesson-copy">
+            <span class="lesson-number">01 · EFECTE HIVERNACLE</span>
+            <h3>El CO₂ atrapa la calor del Sol</h3>
+            <p>Per fer funcionar cotxes, fàbriques i llums cremem petroli, carbó i gas natural. En cremar-los es genera un gas invisible, el <strong>diòxid de carboni (CO₂)</strong>, que s’acumula a l’atmosfera i no deixa escapar la calor. Com més CO₂, més s’escalfa la Terra.</p>
+            <div class="simple-definition"><b>Gas d’efecte hivernacle</b><span>Gas que reté a l’atmosfera part de la calor que la Terra emet cap a l’espai.</span></div>
+            <fieldset class="hypothesis-card" id="greenhouseHypothesis"><legend>Abans de provar-ho: què passarà si hi ha més CO₂ a l’atmosfera?</legend><label><input type="radio" name="ghGuess" value="a"/> Entrarà menys llum del Sol.</label><label><input type="radio" name="ghGuess" value="b"/> Es quedarà atrapada més calor.</label><button type="button" id="checkGhGuess">Comprova la meva idea</button><p id="ghGuessFeedback" aria-live="polite"></p></fieldset>
+          </div>
+          <div class="greenhouse-sim">
+            <div class="sim-labels"><span>EL SOL</span><span>L’ATMOSFERA</span><span>LA TERRA</span></div>
+            <canvas id="ghCanvas" width="760" height="300" aria-label="La llum del Sol entra a l’atmosfera, escalfa la Terra i part de la calor torna a la superfície quan hi ha més CO₂."></canvas>
+            <label class="sim-slider" for="ghSlider"><span>Mou el control i viatja pel temps</span><output id="ghEra" for="ghSlider">Fa uns 250 anys</output></label>
+            <input id="ghSlider" type="range" min="0" max="6" step="1" value="0" aria-describedby="ghNote" />
+            <div class="wave-readout"><span><b id="ghPpm">280</b> ppm<small>CO₂ a l’atmosfera</small></span><span><b id="ghDelta">—</b><small id="ghDeltaLabel">punt de partida</small></span></div>
+            <p id="ghNote" class="sim-note">Les dades vénen de la NASA i la NOAA. L’increment de temperatura es compara amb la mitjana de 1951–1980.</p>
+          </div>
+        </article>
+
+        <article class="foundation-lab reverse" id="climateLab">
+          <div class="lesson-copy">
+            <span class="lesson-number">02 · TEMPS I CLIMA</span>
+            <h3>Diferència entre clima i temps meteorològic</h3>
+            <p>El <strong>temps meteorològic</strong> és el que passa un dia concret. El <strong>clima</strong> és com acostuma a ser el temps d’un lloc al llarg de molts anys. Per saber com canvia el clima, els científics mesuren la temperatura cada dia, durant molts anys, sempre al mateix lloc i a les mateixes hores, i després comparen les dades.</p>
+            <fieldset class="hypothesis-card chart-questions" id="climateHypothesis">
+              <legend>Mira el gràfic i respon</legend>
+              <p class="chart-q-intro">Mou el control fins a <b>1980–2024</b> per veure’l sencer.</p>
+              <div class="chart-q" data-correct="b">
+                <p class="chart-q-title">1. Cap on va la línia?</p>
+                <p class="chart-q-hint">Mira el gràfic: la línia va cap amunt o cap avall?</p>
+                <label><input type="radio" name="climQ1" value="a"/> a) Cap avall.</label>
+                <label><input type="radio" name="climQ1" value="b"/> b) Cap amunt.</label>
+                <label><input type="radio" name="climQ1" value="c"/> c) Es queda igual.</label>
+                <p class="chart-q-feedback" aria-live="polite"></p>
+              </div>
+              <div class="chart-q" data-correct="c">
+                <p class="chart-q-title">2. L’any més calent</p>
+                <p class="chart-q-hint">Quin any té el punt més alt del gràfic?</p>
+                <label><input type="radio" name="climQ2" value="a"/> a) 1980</label>
+                <label><input type="radio" name="climQ2" value="b"/> b) 2000</label>
+                <label><input type="radio" name="climQ2" value="c"/> c) 2024</label>
+                <p class="chart-q-feedback" aria-live="polite"></p>
+              </div>
+              <div class="chart-q" data-correct="a">
+                <p class="chart-q-title">3. L’any menys càlid</p>
+                <p class="chart-q-hint">I quin any té el punt més baix?</p>
+                <label><input type="radio" name="climQ3" value="a"/> a) 1980</label>
+                <label><input type="radio" name="climQ3" value="b"/> b) 2010</label>
+                <label><input type="radio" name="climQ3" value="c"/> c) 2024</label>
+                <p class="chart-q-feedback" aria-live="polite"></p>
+              </div>
+              <button type="button" id="checkClimGuess">Comprova les respostes</button>
+              <p id="climGuessFeedback" aria-live="polite"></p>
+            </fieldset>
+          </div>
+          <div class="climate-sim">
+            <canvas id="climateCanvas" width="760" height="280" aria-label="Gràfic de temperatures. Amb pocs dies es veuen pujades i baixades; amb molts anys es veu la tendència a pujar."></canvas>
+            <label class="sim-slider" for="climateSlider"><span>Quant de temps observem?</span><output id="climateWord" for="climateSlider">1 dia</output></label>
+            <input id="climateSlider" type="range" min="0" max="2" step="1" value="0" aria-describedby="climateNote" />
+            <div class="situation-scale" aria-hidden="true"><span>1 dia</span><span>1 mes</span><span>1980–2024</span></div>
+            <p id="climateNote" class="sim-conclusion">Amb un sol dia només veiem el temps: avui fa aquesta temperatura.</p>
+          </div>
+        </article>
+
+        <article class="foundation-lab" id="comfortLab">
+          <div class="lesson-copy">
+            <span class="lesson-number">03 · TEMPERATURA I CONFORT</span>
+            <h3>La temperatura afecta com ens sentim</h3>
+            <p>La temperatura és una de les variables ambientals més importants perquè influeix en el nostre benestar i en el funcionament dels ecosistemes. A les aules, la temperatura de confort és aproximadament entre <strong>18 °C i 22 °C</strong>. Les temperatures molt altes o molt baixes poden afectar la salut de les persones i el medi ambient.</p>
+            <fieldset class="hypothesis-card" id="comfortHypothesis"><legend>Abans de provar-ho: a quina temperatura s’està bé a casa?</legend><label><input type="radio" name="comfortGuess" value="a"/> Entre 18 °C i 22 °C.</label><label><input type="radio" name="comfortGuess" value="b"/> Entre 30 °C i 35 °C.</label><button type="button" id="checkComfortGuess">Comprova la meva idea</button><p id="comfortGuessFeedback" aria-live="polite"></p></fieldset>
+          </div>
+          <div class="situation-sim">
+            <div class="situation-stage" id="comfortStage"><span id="comfortIcon" aria-hidden="true">🥶</span><div><small id="comfortZone">FRED EXTREM</small><h4 id="comfortName">Una nit gelada</h4><p id="comfortAdvice">El fred extrem pot provocar gelades, danyar les plantes i augmentar el risc d’hipotèrmia.</p></div><strong><b id="comfortTemp">−5</b> °C</strong></div>
+            <label for="comfortSlider">Mou el control per visitar diferents temperatures</label>
+            <input id="comfortSlider" type="range" min="0" max="5" step="1" value="0" aria-describedby="comfortNote" />
+            <div class="situation-scale" aria-hidden="true"><span>fred</span><span>confort</span><span>calor</span><span>calor extrema</span></div>
+            <p id="comfortNote" class="sim-note">Són valors aproximats. El confort també depèn de l’activitat que fem i de la roba que portem.</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- ============================ EXPERIMENTA ============================ -->
+      <section class="lab-section" id="experimenta">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> Zona d’experimentació</p>
+            <h2>Mesura la temperatura del menjador</h2>
+          </div>
+          <p>Dissenya la mesura com un científic: tria on poses el termòmetre, escriu la teva hipòtesi i comprova com canvia la temperatura segons l’hora i el lloc.</p>
+        </div>
+
+        <div class="lab-grid">
+          <form class="control-panel" id="labControls" onsubmit="return false">
+            <div class="panel-title">
+              <span>CONTROLS</span>
+              <button type="button" id="resetLab" class="icon-button" aria-label="Reinicia la simulació" title="Reinicia">↻</button>
+            </div>
+
+            <fieldset>
+              <legend>1. On col·loques el termòmetre?</legend>
+              <p class="control-help">El <strong>termòmetre</strong> mesura la temperatura de l’espai on és. Els científics sempre mesuren al mateix lloc. Tria’n un i mira què passa amb la lectura.</p>
+              <div class="source-grid">
+                <label class="source-card">
+                  <input type="radio" name="spot" value="center" data-name="Lloc fix del menjador" data-icon="icon-center" checked />
+                  <svg class="source-icon" aria-hidden="true"><use href="#icon-center"></use></svg><b>Centre del menjador</b><small>lluny del sol i del radiador</small>
+                </label>
+                <label class="source-card">
+                  <input type="radio" name="spot" value="window" data-name="Finestra amb sol" data-icon="icon-window" />
+                  <svg class="source-icon" aria-hidden="true"><use href="#icon-window"></use></svg><b>Finestra</b><small>on toca el sol directe</small>
+                </label>
+                <label class="source-card">
+                  <input type="radio" name="spot" value="radiator" data-name="Prop del radiador" data-icon="icon-radiator" />
+                  <svg class="source-icon" aria-hidden="true"><use href="#icon-radiator"></use></svg><b>Radiador</b><small>a prop de la calefacció</small>
+                </label>
+                <label class="source-card">
+                  <input type="radio" name="spot" value="door" data-name="Porta del passadís" data-icon="icon-door" />
+                  <svg class="source-icon" aria-hidden="true"><use href="#icon-door"></use></svg><b>Porta</b><small>corrent d’aire del passadís</small>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="experiment-hypothesis">
+              <legend>2. Fes una hipòtesi</legend>
+              <p>Encara no moguis l’hora. Amb el lloc que has triat, què creus que passarà?</p>
+              <label for="guessHour">La temperatura serà més alta a les...</label><select id="guessHour"><option value="">Tria una resposta</option><option value="9">9:00 h</option><option value="12">12:00 h</option><option value="16">16:00 h</option></select>
+              <label for="guessComfort">A les 12:00 h, el menjador serà dins la zona de confort (18–22 °C)?</label><select id="guessComfort"><option value="">Tria una resposta</option><option value="yes">Sí</option><option value="no">No</option></select>
+              <button type="button" id="setLabGuess">Ja tinc la meva hipòtesi</button>
+              <p id="labGuessFeedback" aria-live="polite"></p>
+            </fieldset>
+
+            <div class="audio-control">
+              <div><b>Mostra el termòmetre</b><small>Mostra o amaga la lectura sobre el menjador</small></div>
+              <button class="toggle-button" id="ledToggle" type="button" role="switch" aria-checked="true"><span></span><b>Visible</b></button>
+            </div>
+          </form>
+
+          <div class="simulation-panel">
+            <div class="scene room-scene" id="roomScene">
+              <div class="scene-topline"><span id="roomSpot">FINESTRA / CENTRE</span><span>VISTA LATERAL DEL MENJADOR</span></div>
+              <canvas id="roomCanvas" width="920" height="480" aria-label="Representació del menjador d’una casa amb finestra, radiador, porta i el termòmetre col·locat al lloc triat"></canvas>
+              <div class="mb-node" id="mbNode" aria-hidden="true">
+                <div class="mb-board"><strong id="mbReadout">22</strong><i>°C</i></div>
+                <small>termòmetre</small>
+              </div>
+            </div>
+
+            <div class="range-block simulation-distance-control">
+              <div class="range-label"><label for="hour">3. Mou l’hora del dia</label><output id="hourValue">12:00 h</output></div>
+              <input id="hour" type="range" min="8" max="17" step="1" value="12" />
+              <div class="range-scale"><span>8 h</span><span>12 h</span><span>17 h</span></div>
+            </div>
+
+            <div class="result-strip">
+              <div class="db-result">
+                <span>LECTURA ESTIMADA</span>
+                <strong><span id="labTemp">22</span> <small>°C</small></strong>
+              </div>
+              <div class="impact-result">
+                <span>INTERPRETACIÓ DE LA TEMPERATURA</span>
+                <b id="labZone">Zona de confort · s’hi està bé</b>
+                <div class="spectrum temp-spectrum" aria-hidden="true"><i id="labNeedle"></i></div>
+                <div class="spectrum-labels"><small>fred</small><small>confort</small><small>calor</small><small>extrema</small></div>
+              </div>
+            </div>
+            <div class="experiment-conclusion" id="labConclusion" aria-live="polite"><b>Comprova la teva hipòtesi:</b> escriu primer què creus que passarà i després mou l’hora del dia.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ ENERGIA ============================ -->
+      <section class="foundations-section energy-section" id="energia">
+        <div class="section-heading foundations-heading">
+          <div><p class="eyebrow"><span></span> Una alternativa</p><h2>Energia que no escalfa el planeta</h2></div>
+          <p>Per això el Club ATMOS investiga com aprofitar el vent: és una energia neta, gratuïta i que mai s’acabarà.</p>
+        </div>
+
+
+        <figure class="energy-banner">
+          <img src="/assets/atmos-10.webp" alt="El Club ATMOS construeix un anemòmetre casolà amb gots i palletes per mesurar el vent" loading="lazy" width="1280" height="720" />
+          <figcaption><span>EL CLUB ATMOS</span><b>El vent també és energia: mesurar-lo ens ajuda a aprofitar-lo.</b></figcaption>
+        </figure>
+
+        <div class="energy-compare">
+          <article class="energy-card dirty">
+            <span class="energy-tag">ENERGIA QUE CONTAMINA</span>
+            <h3>Cremar combustibles fòssils</h3>
+            <ol><li><b>🏭</b> Cremem petroli, carbó i gas natural.</li><li><b>☁️</b> Surt un gas invisible: el diòxid de carboni.</li><li><b>🌡️</b> No deixa escapar la calor del Sol.</li><li><b>🌍</b> La Terra s’escalfa.</li></ol>
+          </article>
+          <article class="energy-card clean">
+            <span class="energy-tag">ENERGIA NETA · RENOVABLE</span>
+            <h3>Aprofitar el vent</h3>
+            <ol><li><b>🌬️</b> El vent bufa.</li><li><b>🔄</b> Fa girar les grans pales de l’aerogenerador.</li><li><b>⚡</b> Es produeix electricitat.</li><li><b>🏠</b> Arriba a cases, escoles i hospitals.</li></ol>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================ EFECTES ============================ -->
+      <section class="effects-section" id="consequencies">
+        <div class="effects-wrap">
+          <div class="effects-copy">
+            <p class="eyebrow light"><span></span> Del termòmetre al planeta</p>
+            <h2>Què passa si la temperatura continua pujant?</h2>
+            <p>El 2024 va ser l’any més càlid des que hi ha registres: <strong>1,28 °C</strong> per sobre de la mitjana de 1951–1980 segons la NASA i la NOAA. Els 10 anys més calorosos s’han concentrat en l’última dècada (2015–2024) i el CO₂ ha arribat a <strong>422,7 ppm</strong>, un 50 % més que abans de la industrialització (280 ppm).</p>
+            <div class="ombra-note"><b>L’Ombra i la climatització</b><p>Una part de l’Ombra prové dels gasos emesos durant dècades per escalfar els edificis a l’hivern i refredar-los a l’estiu. La calefacció i l’aire condicionat consumeixen energia que, quan prové de combustibles fòssils, genera CO₂ i altres contaminants. Com més energia consumim, més gasos emetem; i com més gasos emetem, més s’escalfa el planeta.</p></div>
+          </div>
+          <div class="effects-grid">
+            <article><span aria-hidden="true">🥵</span><h3>Salut</h3><p>La calor intensa augmenta el risc de deshidratació, esgotament o cop de calor. El fred extrem pot provocar hipotèrmia o congelacions.</p></article>
+            <article><span aria-hidden="true">🔥</span><h3>Natura</h3><p>Les temperatures extremes afavoreixen els incendis i la sequera, i danyen boscos, cultius i ecosistemes. Amb més d’1,5 °C es podria perdre entre el 70 % i el 90 % dels coralls.</p></article>
+            <article><span aria-hidden="true">🧊</span><h3>Gel i mar</h3><p>Es fonen els casquets polars i les glaceres. El nivell del mar ha pujat entre 20 i 23 cm des del 1880 i ara puja uns 4 mm cada any.</p></article>
+            <article><span aria-hidden="true">⚡</span><h3>Energia</h3><p>Climatitzar consumeix energia tot l’any. A l’hivern, calefacció massa alta; a l’estiu, una consigna d’aire condicionat per sota de 25–26 °C també en malbarata.</p></article>
+          </div>
+        </div>
+        <div class="scenario-wrap">
+          <h3>Projeccions per al 2100 (IPCC AR6)</h3>
+          <div class="scenario-grid" role="table" aria-label="Escenaris possibles d’augment de la temperatura global per al 2100">
+            <div role="row" class="scenario head"><span role="columnheader">Escenari</span><span role="columnheader">Temperatura</span><span role="columnheader">Nivell del mar</span></div>
+            <div role="row" class="scenario s-low"><span role="cell">Optimista</span><span role="cell">+1,5 °C</span><span role="cell">+0,4 m</span></div>
+            <div role="row" class="scenario s-mid"><span role="cell">Moderat</span><span role="cell">+2,7 °C</span><span role="cell">+0,7 m</span></div>
+            <div role="row" class="scenario s-high"><span role="cell">Pessimista</span><span role="cell">+4,4 °C</span><span role="cell">+1–2 m</span></div>
+          </div>
+          <small>Fonts: IPCC AR6 (2021), NASA GISTEMP v4, NOAA NCEI, WMO.</small>
+        </div>
+      </section>
+
+      <!-- ============================ MISSIÓ ============================ -->
+      <section class="mission-section" id="missio">
+        <div class="mission-intro">
+          <p class="eyebrow light"><span></span> Activitat final</p>
+          <h2>Missió: fem retrocedir l’Ombra</h2>
+          <p class="mission-story">L’any 2070 el barri de Brisa emet molt CO₂ i l’Ombra no deixa de créixer. Les emissions d’un any són el <strong>100 %</strong>. Has de fer-les baixar. Segueix aquests 3 passos:</p>
+        </div>
+        <ol class="mission-sequence" aria-label="Com es fa la missió">
+          <li><b>1</b><div><h3>Tria 3 accions</h3><p>Exactament 3, ni més ni menys.</p></div></li>
+          <li><b>2</b><div><h3>No passis de 7 punts</h3><p>Cada acció costa punts. El total no pot superar 7.</p></div></li>
+          <li><b>3</b><div><h3>Arriba al 62 % o menys</h3><p>Partim del 100 %. Cada acció fa baixar el percentatge.</p></div></li>
+        </ol>
+
+        <figure class="mission-banner">
+          <img src="/assets/atmos-02.webp" alt="El Club ATMOS compara accions per reduir les emissions d’un barri sobre una maqueta hologràfica" loading="lazy" width="1280" height="720" />
+          <figcaption><span>MISSIÓ DEL CLUB</span><b>Tria les accions que t’ajudin a assolir l’objectiu sense passar dels punts disponibles.</b></figcaption>
+        </figure>
+
+        <div class="mission-board">
+          <div class="mission-dash" aria-label="Estat de la proposta">
+            <div class="dash-card dash-count">
+              <p class="dash-label"><span>1</span> ACCIONS TRIADES</p>
+              <div class="dash-big"><b id="measureCount">0</b><em>de 3</em></div>
+              <div class="count-dots" id="countDots" aria-hidden="true"></div>
+              <p class="dash-goal">Has de triar <b>exactament 3</b></p>
+            </div>
+            <div class="dash-card dash-points">
+              <p class="dash-label"><span>2</span> PUNTS GASTATS</p>
+              <div class="dash-big"><b id="budgetValueTop">0</b><em>de 7</em></div>
+              <div class="budget-dots" id="budgetDots"></div>
+              <p class="dash-goal">Màxim: <b>7 punts</b></p>
+            </div>
+            <div class="dash-card dash-emissions">
+              <p class="dash-label"><span>3</span> EMISSIONS ARA</p>
+              <div class="dash-big"><b id="missionTemp">100</b><em>%</em></div>
+              <div class="emission-bar" id="missionDial" aria-hidden="true"><i class="goal"><u>62 %</u></i></div>
+              <p class="dash-goal">Objectiu: <b>62 % o menys</b></p>
+            </div>
+          </div>
+          <div class="mission-state"><h3 id="missionMessage">Cal actuar</h3><p id="missionHint">Tria les teves 3 accions de la llista.</p></div>
+
+          <h3 class="measures-title">Tria les teves 3 accions <small>Cada targeta mostra quant baixa les emissions i quants punts costa.</small></h3>
+          <div class="measures" id="measures">
+            <button type="button" data-reduction="8" data-cost="1" data-key="led">
+              <span class="m-name">Il·luminació LED i apagar els llums que no calen</span>
+              <span class="m-stats"><span class="m-gain"><small>BAIXA LES EMISSIONS</small><b>−8 %</b></span><span class="m-cost"><small>COSTA</small><b>1 punt</b></span></span>
+              <em>ESTALVI</em><i></i>
+            </button>
+            <button type="button" data-reduction="12" data-cost="2" data-key="forest">
+              <span class="m-name">Plantar un bosc urbà</span>
+              <span class="m-stats"><span class="m-gain"><small>BAIXA LES EMISSIONS</small><b>−12 %</b></span><span class="m-cost"><small>COSTA</small><b>2 punts</b></span></span>
+              <em>NATURA</em><i></i>
+            </button>
+            <button type="button" data-reduction="18" data-cost="3" data-key="wind">
+              <span class="m-name">Parc eòlic</span>
+              <span class="m-stats"><span class="m-gain"><small>BAIXA LES EMISSIONS</small><b>−18 %</b></span><span class="m-cost"><small>COSTA</small><b>3 punts</b></span></span>
+              <em>ENERGIA NETA</em><i></i>
+            </button>
+            <button type="button" data-reduction="15" data-cost="3" data-key="solar">
+              <span class="m-name">Plaques solars als terrats</span>
+              <span class="m-stats"><span class="m-gain"><small>BAIXA LES EMISSIONS</small><b>−15 %</b></span><span class="m-cost"><small>COSTA</small><b>3 punts</b></span></span>
+              <em>ENERGIA NETA</em><i></i>
+            </button>
+            <button type="button" data-reduction="14" data-cost="3" data-key="transit">
+              <span class="m-name">Transport públic elèctric</span>
+              <span class="m-stats"><span class="m-gain"><small>BAIXA LES EMISSIONS</small><b>−14 %</b></span><span class="m-cost"><small>COSTA</small><b>3 punts</b></span></span>
+              <em>MOBILITAT</em><i></i>
+            </button>
+            <button type="button" data-reduction="25" data-cost="6" data-key="capture">
+              <span class="m-name">Gran planta de captura de CO₂</span>
+              <span class="m-stats"><span class="m-gain"><small>BAIXA LES EMISSIONS</small><b>−25 %</b></span><span class="m-cost"><small>COSTA</small><b>6 punts</b></span></span>
+              <em class="warn">MOLT CARA · ENCARA EXPERIMENTAL</em><i></i>
+            </button>
+          </div>
+
+          <div class="mission-actions">
+            <button type="button" class="secondary-button" id="resetMission">Reinicia</button>
+            <button type="button" class="primary-button dark" id="checkMission">Comprova la proposta</button>
+          </div>
+          <div id="missionFeedback" class="mission-feedback" hidden aria-live="polite"></div>
+          <figure class="mission-success-art" id="missionSuccessArt" hidden>
+            <img src="/assets/atmos-08.webp" alt="El Club ATMOS celebra que ha fet retrocedir l’Ombra reduint les emissions del barri" loading="lazy" width="1280" height="720" />
+            <figcaption>Missió completada pel Club ATMOS</figcaption>
+          </figure>
+        </div>
+
+        <div class="exit-ticket">
+          <figure><img src="/assets/atmos-09.webp" alt="El Club ATMOS reflexiona sobre els resultats de la investigació" loading="lazy" width="1280" height="720" /></figure>
+          <div><p>ABANS D’ACABAR</p><h3>Quina afirmació explica millor el que has après?</h3></div>
+          <form id="quizForm">
+            <label><input type="radio" name="quiz" value="a" /><span>A. Si un dia fa fred, vol dir que el planeta ja no s’escalfa.</span></label>
+            <label><input type="radio" name="quiz" value="b" /><span>B. Per saber com canvia el clima cal mesurar durant molts anys, sempre al mateix lloc i a les mateixes hores.</span></label>
+            <label><input type="radio" name="quiz" value="c" /><span>C. El CO₂ deixa escapar tota la calor del Sol cap a l’espai.</span></label>
+            <button type="submit">Comprova la resposta</button>
+            <p id="quizFeedback" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand"><img src="/assets/rea-logo.webp" alt="Robots en Acció!" width="52" height="52" /><p><b>Club ATMOS · Laboratori de la temperatura</b><br />Una iniciativa de Robots en Acció!</p></div>
+      <p>Les dades són una aproximació didàctica. Per mesurar un espai real cal utilitzar un termòmetre.</p>
+    </footer>
+
+    <dialog id="primerDialog">
+      <button class="dialog-close" id="closePrimer" aria-label="Tanca">×</button>
+      <p class="eyebrow"><span></span> Idea clau</p>
+      <h2>La missió del Club ATMOS</h2>
+      <p>Un missatge del futur ho confirma: l’any 2070 l’Ombra s’estén per l’atmosfera i la Terra pateix temperatures extremes. Primer entendrem per què puja la temperatura. Després la mesurarem, com autèntics científics. Finalment, buscarem solucions per reduir les emissions i fer retrocedir l’Ombra.</p>
+      <div class="mini-demo mission-steps">
+        <div><span>PAS 1</span><b>Entendre</b></div><i>→</i><div><span>PAS 2</span><b>Mesurar</b></div><i>→</i><div class="accent"><span>PAS 3</span><b>Actuar</b></div>
+      </div>
+      <button class="primary-button" id="primerContinue">Entesos, comencem</button>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
